@@ -29,7 +29,7 @@ if File.exist?(API_SPEC_INITIALIZER)
         @order_id,
         { :currency => 'EUR', :value => '1234' },
         { :email => "#{@user_id}@example.com", :reference => @user_id },
-        { :expiry_month => '08', :expiry_year => '2018', :holder_name => "Simon #{@user_id} Hopper", :number => '4111111111111111', :cvc => '737' },
+        { :expiry_month => '08', :expiry_year => '2018', :holder_name => "Simon Hopper", :number => '4111111111111111', :cvc => '737' },
         true
       )
     end
