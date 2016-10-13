@@ -222,7 +222,7 @@ module Adyen
       class BilletResponse < Response
         RECEIVED = "Received"
 
-        response_attrs :result_code, :billet_url, :psp_reference
+        response_attrs :result_code, :billet_url, :psp_reference, :refusal_reason
 
         def success?
           super && params[:result_code] == RECEIVED
@@ -233,7 +233,8 @@ module Adyen
             {
               :psp_reference  => result.text('./payment:pspReference'),
               :result_code    => result_code = result.text('./payment:resultCode'),
-              :billet_url     => (result_code == RECEIVED) ? result.children[0].children[0].children[1].text : ""
+              :billet_url     => (result_code == RECEIVED) ? result.children[0].children[0].children[1].text : "",
+              :refusal_reason => (invalid_request? ? fault_message : result.text('./payment:refusalReason'))
             }
           end
         end
